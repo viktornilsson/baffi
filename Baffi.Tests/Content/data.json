@@ -1,0 +1,92 @@
+﻿//{
+//  "Images": [
+//    {
+//      "Name": "Adidas Bild",
+//      "Url": "www.nelly.com"
+//    },
+//    {
+//      "Name": "Nike Bild",
+//      "Url": "www.nelly.com"
+//    }
+//  ],
+//  "Products": [
+//    {
+//      "Name": "Adidas Sko",
+//      "Price": "1234:-",
+//      "Size": "EU 42"
+//    },
+//    {
+//      "Name": "Nike Sko",
+//      "Price": "1234:-",
+//      "Size": "EU 41"
+//    }
+//  ],
+//  "Header": "Yao",
+//  "FirstName": "Hannes",
+//  "LastName": "Hammer"
+//} 
+
+{
+  "Images": [
+    {
+      "ImageTypes": [
+        {
+          "ImageNames": [
+            {
+              "Name": "Jacket LG"
+            },
+            {
+              "Name": "Shirt LG"
+            }
+          ],
+          "Type": "Large"
+        },
+        {
+          "ImageNames": [
+            {
+              "Name": "Jacket SM"
+            },
+            {
+              "Name": "Shirt SM"
+            }
+          ],
+          "Type": "Small"
+        }
+      ],
+      "Name": "Adidas Img",
+      "Url": "www.nelly.com/adidas"
+    },
+    {
+      "ImageTypes": [
+        {
+          "ImageNames": [
+            {
+              "Name": "Jacket"
+            },
+            {
+              "Name": "Shirt"
+            }
+          ],
+          "Type": "Medium"
+        }
+      ],
+      "Name": "Nike Img",
+      "Url": "www.nelly.com/nike"
+    }
+  ],
+  "Products": [
+    {
+      "Name": "Adidas Shoe",
+      "Price": "1234:-",
+      "Size": "EU 39"
+    },
+    {
+      "Name": "Nike Shoe",
+      "Price": "4321:-",
+      "Size": "EU 40"
+    }
+  ],
+  "Header": "Yoo!",
+  "FirstName": "Nelly",
+  "LastName": "Holic"
+}

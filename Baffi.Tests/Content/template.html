@@ -1,0 +1,61 @@
+﻿
+
+<div>
+    <h1>{{Header}}</h1>
+
+    Hello {{FirstName}} {{LastName}}!                  
+
+    <div>
+        {{for Images}}
+        <div class="image">
+            <span>Name: {{Name}}</span>
+            <span><a href="{{Url}}">Link</a></span>
+            
+            
+            {{for ImageTypes}}
+            <div class="image-types">
+                <span>Type: {{Type}}</span>
+                
+                {{for ImageNames}}
+                <ul>
+                    <li>ImgName: {{Name}}</li>               
+                </ul>
+
+                {{end ImageNames}}
+            </div>
+            {{end ImageTypes}}
+
+        </div>
+        {{end Images}}
+    </div>
+
+    <div>
+        {{for Products}}
+        <div class="product">
+            <span>Name: {{Name}}</span>
+            <span>Price: {{Price}}</span>
+            <span>Size: {{Size}}</span>
+        </div>
+        {{end Products}}
+    </div>
+</div>
+
+<style>
+    .product {
+        border: 2px solid #000000;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .image {
+        border: 2px solid #000000;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .image-types {
+        border: 2px solid #000000;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+</style>

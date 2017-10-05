@@ -1,0 +1,12 @@
+# IGNORE THIS FILES
+
+/.vs
+/Baffi/**/*.user
+/Baffi/**/*lock.json
+/packages
+
+/Baffi/bin
+/Baffi/obj
+
+/Baffi.Tests/bin
+/Baffi.Tests/obj
