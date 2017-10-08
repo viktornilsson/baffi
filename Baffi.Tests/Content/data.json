@@ -1,31 +1,4 @@
-﻿//{
-//  "Images": [
-//    {
-//      "Name": "Adidas Bild",
-//      "Url": "www.nelly.com"
-//    },
-//    {
-//      "Name": "Nike Bild",
-//      "Url": "www.nelly.com"
-//    }
-//  ],
-//  "Products": [
-//    {
-//      "Name": "Adidas Sko",
-//      "Price": "1234:-",
-//      "Size": "EU 42"
-//    },
-//    {
-//      "Name": "Nike Sko",
-//      "Price": "1234:-",
-//      "Size": "EU 41"
-//    }
-//  ],
-//  "Header": "Yao",
-//  "FirstName": "Hannes",
-//  "LastName": "Hammer"
-//} 
-
+﻿
 {
   "Images": [
     {
@@ -54,7 +27,7 @@
         }
       ],
       "Name": "Adidas Img",
-      "Url": "www.nelly.com/adidas"
+      "Url": "www.adidas.com"
     },
     {
       "ImageTypes": [
@@ -71,7 +44,7 @@
         }
       ],
       "Name": "Nike Img",
-      "Url": "www.nelly.com/nike"
+      "Url": "www.nike.com"
     }
   ],
   "Products": [
@@ -87,6 +60,6 @@
     }
   ],
   "Header": "Yoo!",
-  "FirstName": "Nelly",
-  "LastName": "Holic"
+  "FirstName": "Jane",
+  "LastName": "Doe"
 }
