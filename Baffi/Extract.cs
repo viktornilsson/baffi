@@ -9,6 +9,11 @@ namespace Baffi
 {
     public static class Extract
     {
+        /// <summary>
+        /// Extract JSON object from HTML template.
+        /// </summary>
+        /// <param name="text">HTML template</param>
+        /// <returns>JSON object</returns>
         public static object GetObject(string text)
         {
             var obj = new ExpandoObject() as IDictionary<string, object>;

@@ -5,6 +5,12 @@ namespace Baffi
 {
     public static class Parse
     {
+        /// <summary>
+        /// Parse HTML-template and JSON object to translated HTML.
+        /// </summary>
+        /// <param name="template">HTML template</param>
+        /// <param name="obj">JSON object</param>
+        /// <returns>Parsed HTML</returns>
         public static string GetTemplate(string template, dynamic obj)
         {
             foreach (var entry in obj)

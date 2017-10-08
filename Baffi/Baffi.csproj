@@ -2,6 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>Baffi</AssemblyName>
+    <RootNamespace>Baffi</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Viktor Nilsson</Authors>
+    <Company>Viktor Nilsson</Company>
+    <Copyright>Copyright (c) 2017 Viktor Nilsson</Copyright>
+    <PackageLicenseUrl>https://gitlab.com/viktornilsson91/baffi/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://gitlab.com/viktornilsson91/baffi</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/viktornilsson91/baffi</RepositoryUrl>
+    <PackageTags>HTML-template JSON parser mustache two-way binding</PackageTags>
+    <PackageId>Baffi</PackageId>
+    <Product>Baffi</Product>
+    <Description>HTML template to JSON object parser. Two-way binding.</Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIconUrl>https://gitlab.com/viktornilsson91/baffi/raw/master/baffi-logo.png</PackageIconUrl>
+    <ApplicationIcon />
+    <Win32Resource />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.6\Baffi.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
