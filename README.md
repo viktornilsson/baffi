@@ -16,9 +16,10 @@ PM> Install-Package Baffi
 # Features
 
 Helps you parse simple HTML templates with data binding and parse them to JSON objects.
-Then you can edit the objects through a JSON editor and after that save them as you please, for example in different languages.
 
-When you have both the HTML template and the JSON object you can parse them togheter and get the translated HTML.
+For example you can edit the JSON in a simple JSON-editor and then save it in multiple languages.
+
+When you have both the HTML template and the JSON object you can parse them together and get the translated HTML.
 
 # Usage
 
@@ -82,7 +83,7 @@ When you have both the HTML template and the JSON object you can parse them togh
 
 #### Then take the template and extract the JSON object.
 ```csharp
-// Get the template from some source
+// Get the template from your source
 var text = System.IO.File.ReadAllText("template.html");
 
 // Here we get the JSON object
@@ -157,7 +158,7 @@ var obj = Extract.GetObject(text);
 }
 ```
 
-#### At least take the template and the object and parse them togheter.
+#### Finally take the template and the object and parse them together.
 ```csharp
 // Get the data from some source
 var template = System.IO.File.ReadAllText("template.html");
