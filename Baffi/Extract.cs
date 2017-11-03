@@ -18,7 +18,7 @@ namespace Baffi
         {
             var obj = new ExpandoObject() as IDictionary<string, object>;
 
-            while(true)
+            while (true)
             {
                 var props = ExtractProps(text);
                 var tag = props.FirstOrDefault(x => x.StartsWith("for", StringComparison.CurrentCultureIgnoreCase));
@@ -38,9 +38,8 @@ namespace Baffi
             
             var parents = ExtractProps(text);
 
-            foreach (var match in parents)
+            foreach (var propName in parents)
             {
-                var propName = match;
                 obj.Add(propName, string.Empty);
             }
 

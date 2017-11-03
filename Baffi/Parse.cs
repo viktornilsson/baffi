@@ -1,10 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Baffi.Helpers;
+using Baffi.Models;
 
 namespace Baffi
 {
     public static class Parse
     {
+        private static readonly List<Type> CustomTypes;
+        private static readonly List<string> CustomTags;
+
+        static Parse()
+        {
+            CustomTypes = CustomTagHelper.GetAllCustomTagTypes();
+
+            CustomTags = CustomTagHelper.GetAllCustomTagTypes()
+                .Select(x => x.Name)
+                .ToList();
+        }
+
         /// <summary>
         /// Parse HTML-template and JSON object to translated HTML.
         /// </summary>
@@ -15,23 +31,31 @@ namespace Baffi
         {
             foreach (var entry in obj)
             {
-                string name = entry.Name;
-
-                if (entry.Value is ICollection)
-                {
-                    template = ParseCollection(template, entry);
-                }
-                else
-                {
-                    template = template.Replace(name.ParseTag(), entry.Value.ToString());
-                }
+                ParseProperty(entry, ref template);
             }
 
             return template;
         }
 
         #region Private methods
-      
+
+        private static void ParseProperty(dynamic property, ref string template)
+        {
+            string name = property.Name;
+
+            if (property.Value is ICollection)
+            {
+                template = ParseCollection(template, property);
+            }
+            else
+            {
+                string value = property.Value.ToString();
+                var newValue = CustomTags.Contains(name) ? ProcessCustomTagValue(name, value) : value;
+
+                template = template.Replace(name.ParseTag(), newValue);
+            }
+        }
+
         private static string ParseCollection(string template, dynamic entry)
         {
             var forTag = $"for {entry.Name}";
@@ -51,22 +75,22 @@ namespace Baffi
 
                 foreach (var childItem in listItem)
                 {
-                    string name = childItem.Name;
-
-                    if (childItem.Value is ICollection)
-                    {
-                        listText = ParseCollection(listText, childItem);
-                    }
-                    else
-                    {
-                        listText = listText.Replace(name.ParseTag(), childItem.Value.ToString());
-                    }
+                    ParseProperty(childItem, ref listText);
                 }
 
                 newChildText += listText;
             }
 
             return template.Replace(fullChildText, newChildText);
+        }
+
+        private static string ProcessCustomTagValue(string tagName, string value)
+        {
+            var type = CustomTypes.FirstOrDefault(x => x.Name == tagName);
+            var customTag = (ICustomTag)Activator.CreateInstance(type);
+            var parameters = CustomTagHelper.GetTagParameters(value);
+
+            return customTag.Process(parameters);
         }
 
         #endregion
