@@ -7,21 +7,21 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Baffi.Helpers
 {
-    public static class CustomTagHelper
+    internal static class CustomTagHelper
     {
-        public static List<Type> GetAllCustomTagTypes()
+        internal static List<Type> GetAllCustomTagTypes()
         {
-            var asmNames = DependencyContext.Default.GetDefaultAssemblyNames();
+            var assemblyNames = DependencyContext.Default.GetDefaultAssemblyNames();
             var type = typeof(ICustomTag);
 
-            var allTypes = asmNames.Select(Assembly.Load)
+            var allTypes = assemblyNames.Select(Assembly.Load)
                 .SelectMany(t => t.GetTypes())
                 .Where(p => p.GetTypeInfo().ImplementedInterfaces.Contains(type)).ToList();
 
             return allTypes;
         }
 
-        public static string[] GetTagParameters(string customTag)
+        internal static string[] GetTagParameters(string customTag)
         {
             char[] splitChars = { '=', '-', '&' };
             var parameters = customTag.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);

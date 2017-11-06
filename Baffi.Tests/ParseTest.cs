@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Baffi.Helpers;
 
 namespace Baffi.Tests
 {
@@ -14,7 +13,7 @@ namespace Baffi.Tests
 
             var obj = Extract.GetObject(text);
 
-            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);           
 
             Assert.IsTrue(obj != null);
             Assert.IsTrue(!string.IsNullOrEmpty(json));

@@ -2,9 +2,9 @@
 
 namespace Baffi.Helpers
 {
-    public static class TagHelper
+    internal static class TagHelper
     {
-        public static string Between(string text, string firstString, string lastString)
+        internal static string Between(string text, string firstString, string lastString)
         {
             var pos1 = text.IndexOf(firstString, StringComparison.Ordinal) + firstString.Length;
             var pos2 = text.IndexOf(lastString, StringComparison.Ordinal);
@@ -13,7 +13,7 @@ namespace Baffi.Helpers
             return finalString;
         }
 
-        public static string BetweenTagText(string text, string firstString, string lastString)
+        internal static string BetweenTagText(string text, string firstString, string lastString)
         {
             var pos1 = text.IndexOf(firstString, StringComparison.Ordinal);
             var pos2 = text.IndexOf(lastString, StringComparison.Ordinal) + lastString.Length;
@@ -22,7 +22,7 @@ namespace Baffi.Helpers
             return finalString;
         }
 
-        public static string ParseTag(this string text)
+        internal static string ParseTag(this string text)
         {
             return $@"{{{{{text}}}}}";
         }

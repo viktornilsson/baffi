@@ -17,7 +17,7 @@ namespace Baffi
             CustomTypes = CustomTagHelper.GetAllCustomTagTypes();
 
             CustomTags = CustomTagHelper.GetAllCustomTagTypes()
-                .Select(x => x.Name)
+                .Select(x => x.Name.ToLower())
                 .ToList();
         }
 
@@ -50,7 +50,7 @@ namespace Baffi
             else
             {
                 string value = property.Value.ToString();
-                var newValue = CustomTags.Contains(name) ? ProcessCustomTagValue(name, value) : value;
+                var newValue = CustomTags.Contains(name.ToLower()) ? ProcessCustomTagValue(name, value) : value;
 
                 template = template.Replace(name.ParseTag(), newValue);
             }
@@ -86,7 +86,7 @@ namespace Baffi
 
         private static string ProcessCustomTagValue(string tagName, string value)
         {
-            var type = CustomTypes.FirstOrDefault(x => x.Name == tagName);
+            var type = CustomTypes.FirstOrDefault(x => string.Equals(x.Name, tagName, StringComparison.CurrentCultureIgnoreCase));
             var customTag = (ICustomTag)Activator.CreateInstance(type);
             var parameters = CustomTagHelper.GetTagParameters(value);
 

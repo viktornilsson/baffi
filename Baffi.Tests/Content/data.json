@@ -27,7 +27,8 @@
         }
       ],
       "Name": "Adidas Img",
-      "Url": "www.adidas.com"
+      "Url": "www.adidas.com",
+      "TestTag": "2-4"
     },
     {
       "ImageTypes": [
@@ -44,7 +45,8 @@
         }
       ],
       "Name": "Nike Img",
-      "Url": "www.nike.com"
+      "Url": "www.nike.com",
+      "TestTag": "1-4"
     }
   ],
   "Products": [
