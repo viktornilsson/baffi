@@ -2,23 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Baffi.Configuration;
 using Baffi.Helpers;
-using Baffi.Models;
 
 namespace Baffi
 {
     public static class Parse
     {
-        private static readonly List<Type> CustomTypes;
-        private static readonly List<string> CustomTags;
+        private static List<Type> _customTypes;
+        private static List<string> _customTags;
 
-        static Parse()
+        /// <summary>
+        /// Initialize parser with custom tags.
+        /// </summary>
+        /// <param name="configuration">Configuration</param>
+        public static void Initialize(Action<IBaffiConfigurationExpression> configuration)
         {
-            CustomTypes = CustomTagHelper.GetAllCustomTagTypes();
+            var expression = new BaffiConfigurationExpression();
+            configuration(expression);
 
-            CustomTags = CustomTagHelper.GetAllCustomTagTypes()
-                .Select(x => x.Name.ToLower())
-                .ToList();
+            _customTypes = expression.CustomTypes;
+            _customTags = _customTypes.Select(x => x.Name.ToLower()).ToList();
         }
 
         /// <summary>
@@ -50,7 +54,7 @@ namespace Baffi
             else
             {
                 string value = property.Value.ToString();
-                var newValue = CustomTags.Contains(name.ToLower()) ? ProcessCustomTagValue(name, value) : value;
+                var newValue = _customTags.Contains(name.ToLower()) ? ProcessCustomTagValue(name, value) : value;
 
                 template = template.Replace(name.ParseTag(), newValue);
             }
@@ -86,7 +90,7 @@ namespace Baffi
 
         private static string ProcessCustomTagValue(string tagName, string value)
         {
-            var type = CustomTypes.FirstOrDefault(x => string.Equals(x.Name, tagName, StringComparison.CurrentCultureIgnoreCase));
+            var type = _customTypes.FirstOrDefault(x => string.Equals(x.Name, tagName, StringComparison.CurrentCultureIgnoreCase));
             var customTag = (ICustomTag)Activator.CreateInstance(type);
             var parameters = CustomTagHelper.GetTagParameters(value);
 

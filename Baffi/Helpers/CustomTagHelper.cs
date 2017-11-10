@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Baffi.Models;
 using Microsoft.Extensions.DependencyModel;
 
 namespace Baffi.Helpers

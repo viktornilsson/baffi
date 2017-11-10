@@ -1,3 +1,4 @@
+using Baffi.Tests.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -6,6 +7,14 @@ namespace Baffi.Tests
     [TestClass]
     public class ParseTest
     {
+        public ParseTest()
+        {
+            Parse.Initialize(cfg =>
+            {
+                cfg.AddTag<TestTag>();
+            });
+        }
+
         [TestMethod]
         public void ExtractHtmlTemplateToJsonObject()
         {

@@ -1,5 +1,5 @@
 ﻿
-namespace Baffi.Models
+namespace Baffi
 {
     public interface ICustomTag
     {

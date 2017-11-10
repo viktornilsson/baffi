@@ -1,5 +1,4 @@
-﻿using Baffi.Models;
-
+﻿
 namespace Baffi.Tests.Models
 {
     public class TestTag : ICustomTag
