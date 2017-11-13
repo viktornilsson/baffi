@@ -3,6 +3,6 @@ namespace Baffi
 {
     public interface ICustomTag
     {
-        string Process(params string[] parameters);
+        string Process(string[] parameters);
     }
 }

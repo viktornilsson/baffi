@@ -50,12 +50,12 @@
   "Products": [
     {
       "Name": "Adidas Shoe",
-      "PriceTag": "2-8",
+      "PriceTag": "12&2",
       "Size": "EU 39"
     },
     {
       "Name": "Nike Shoe",
-      "PriceTag": "2-4",
+      "PriceTag": "10&4",
       "Size": "EU 40"
     }
   ],

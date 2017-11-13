@@ -7,7 +7,7 @@ namespace Baffi.Helpers
     {
         internal static string[] GetTagParameters(string customTag)
         {
-            char[] splitChars = { '=', '-', '&' };
+            char[] splitChars = { '&' };
             var parameters = customTag.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
 
             return parameters.ToArray();
