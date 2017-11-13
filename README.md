@@ -21,9 +21,50 @@ For example you can edit the JSON in a simple JSON-editor and then save it in mu
 
 When you have both the HTML template and the JSON object you can parse them together and get the translated HTML.
 
+# Configuration
+
+#### Custom tags
+You can create custom tags that implements `ICustomTag` interface,
+the `Process()` method runs when call `Parser.Compile()`.
+```csharp
+public class PriceTag : ICustomTag
+{
+    public string Process(params string[] parameters)
+    {
+        var val1 = parameters.Length > 0 ? int.Parse(parameters[0]) : 0;
+        var val2 = parameters.Length > 1 ? int.Parse(parameters[1]) : 0;
+
+        return $"{val1 * val2}:-";
+    }
+}
+```
+
+To use this in the template, just use the name of the class.
+```html
+<span>{{PriceTag}}</span>
+```
+
+The value in the json object can be passed as parameters to the `Process()` method.
+For example article numbers to fetch the price from the database.
+```json
+{
+    "PriceTag": "123456-1234"
+}
+```
+
+#### Initialize Baffi.Parser with custom tags.
+If you want to use custom tags you need to configure them before you run `Parser.Compile()`.
+For example in your `Global.asax` or `Startup.cs`.
+```csharp
+Parser.Initialize(cfg =>
+{
+    cfg.AddTag<PriceTag>();
+});
+```
+
 # Usage
 
-#### For now we supports data-binding and for loops
+### We supports data-binding and for loops like this.
 ```html
 <h1>{{Header}}</h1>
 ```
@@ -87,7 +128,7 @@ When you have both the HTML template and the JSON object you can parse them toge
 var text = System.IO.File.ReadAllText("template.html");
 
 // Here we get the JSON object
-var obj = Extract.GetObject(text);
+var obj = Parser.Extract(text);
 ```
 
 #### When you have the JSON object you can modify it as you want, for example like this.
@@ -168,5 +209,5 @@ var json = System.IO.File.ReadAllText("data.json");
 dynamic obj = JsonConvert.DeserializeObject(json);
 
 // Get the translated HTML
-string html = Parse.GetTemplate(template, obj);
+string html = Parser.Compile(template, obj);
 ```
