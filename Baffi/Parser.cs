@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using Baffi.Configuration;
 using Baffi.Helpers;
 
 namespace Baffi
 {
-    public static class Parse
+    public static class Parser
     {
-        private static List<Type> _customTypes;
-        private static List<string> _customTags;
+        private static List<Type> _customTypes = new List<Type>();
+        private static List<string> _customTags =  new List<string>();
 
         /// <summary>
         /// Initialize parser with custom tags.
@@ -26,16 +27,53 @@ namespace Baffi
         }
 
         /// <summary>
+        /// Extract JSON object from HTML template.
+        /// </summary>
+        /// <param name="text">HTML template</param>
+        /// <returns>JSON object</returns>
+        public static object Extract(string text)
+        {
+            var obj = new ExpandoObject() as IDictionary<string, object>;
+
+            while (true)
+            {
+                var props = ExtractHelper.ExtractProps(text);
+                var tag = props.FirstOrDefault(x => x.StartsWith("for", StringComparison.CurrentCultureIgnoreCase));
+
+                if (string.IsNullOrEmpty(tag))
+                    break;
+
+                var tagName = tag.Replace("for", string.Empty).Trim();
+
+                string newText;
+                var childObjects = ExtractHelper.GetChildObjects(tagName, text, out newText);
+
+                text = newText;
+
+                obj.Add(tagName, childObjects);
+            }
+
+            var parents = ExtractHelper.ExtractProps(text);
+
+            foreach (var propName in parents)
+            {
+                obj.Add(propName, string.Empty);
+            }
+
+            return obj;
+        }
+
+        /// <summary>
         /// Parse HTML-template and JSON object to translated HTML.
         /// </summary>
         /// <param name="template">HTML template</param>
         /// <param name="obj">JSON object</param>
         /// <returns>Parsed HTML</returns>
-        public static string GetTemplate(string template, dynamic obj)
+        public static string Compile(string template, dynamic obj)
         {
             foreach (var entry in obj)
             {
-                ParseProperty(entry, ref template);
+                CompileProperty(entry, ref template);
             }
 
             return template;
@@ -43,13 +81,13 @@ namespace Baffi
 
         #region Private methods
 
-        private static void ParseProperty(dynamic property, ref string template)
+        private static void CompileProperty(dynamic property, ref string template)
         {
             string name = property.Name;
 
             if (property.Value is ICollection)
             {
-                template = ParseCollection(template, property);
+                template = CompileCollection(template, property);
             }
             else
             {
@@ -60,7 +98,7 @@ namespace Baffi
             }
         }
 
-        private static string ParseCollection(string template, dynamic entry)
+        private static string CompileCollection(string template, dynamic entry)
         {
             var forTag = $"for {entry.Name}";
             var endTag = $"end {entry.Name}";
@@ -79,7 +117,7 @@ namespace Baffi
 
                 foreach (var childItem in listItem)
                 {
-                    ParseProperty(childItem, ref listText);
+                    CompileProperty(childItem, ref listText);
                 }
 
                 newChildText += listText;

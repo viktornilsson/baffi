@@ -4,11 +4,11 @@
     <h1>{{Header}}</h1>
 
     Hello {{FirstName}} {{LastName}}!                  
-    {{TestTag}}
+
     <div>
         {{for Images}}
         <div class="image">
-            <span>Name: {{Name}} {{TestTag}}</span>
+            <span>Name: {{Name}}</span>
             <span><a href="{{Url}}">Link</a></span>
             
             
@@ -33,7 +33,7 @@
         {{for Products}}
         <div class="product">
             <span>Name: {{Name}}</span>
-            <span>Price: {{Price}}</span>
+            <span>Price: {{PriceTag}}</span>
             <span>Size: {{Size}}</span>
         </div>
         {{end Products}}

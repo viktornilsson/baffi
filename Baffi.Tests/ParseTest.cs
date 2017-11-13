@@ -9,9 +9,9 @@ namespace Baffi.Tests
     {
         public ParseTest()
         {
-            Parse.Initialize(cfg =>
+            Parser.Initialize(cfg =>
             {
-                cfg.AddTag<TestTag>();
+                cfg.AddTag<PriceTag>();
             });
         }
 
@@ -20,7 +20,7 @@ namespace Baffi.Tests
         {
             var text = System.IO.File.ReadAllText("content/template.html");
 
-            var obj = Extract.GetObject(text);
+            var obj = Parser.Extract(text);
 
             var json = JsonConvert.SerializeObject(obj, Formatting.Indented);           
 
@@ -36,7 +36,7 @@ namespace Baffi.Tests
 
             dynamic parsedObject = JsonConvert.DeserializeObject(jsonData);
 
-            string template = Parse.GetTemplate(text, parsedObject);
+            string template = Parser.Compile(text, parsedObject);
 
             Assert.IsTrue(parsedObject != null);
             Assert.IsTrue(!string.IsNullOrEmpty(template));

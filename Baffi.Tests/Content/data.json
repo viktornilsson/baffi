@@ -27,8 +27,7 @@
         }
       ],
       "Name": "Adidas Img",
-      "Url": "www.adidas.com",
-      "TestTag": "2-4"
+      "Url": "www.adidas.com"
     },
     {
       "ImageTypes": [
@@ -45,24 +44,22 @@
         }
       ],
       "Name": "Nike Img",
-      "Url": "www.nike.com",
-      "TestTag": "1-4"
+      "Url": "www.nike.com"
     }
   ],
   "Products": [
     {
       "Name": "Adidas Shoe",
-      "Price": "1234:-",
+      "PriceTag": "2-8",
       "Size": "EU 39"
     },
     {
       "Name": "Nike Shoe",
-      "Price": "4321:-",
+      "PriceTag": "2-4",
       "Size": "EU 40"
     }
   ],
   "Header": "Yoo!",
   "FirstName": "Jane",
-  "LastName": "Doe",
-  "TestTag": "123456-1234" 
+  "LastName": "Doe"
 }
