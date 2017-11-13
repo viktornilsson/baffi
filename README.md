@@ -51,7 +51,7 @@ To pass multiple values we split the text value on the char `&`.
 For example article numbers to fetch the price from the database.
 ```json
 {
-    "PriceTag": "123456-1234"
+    "PriceTag": "123456&1234"
 }
 ```
 
