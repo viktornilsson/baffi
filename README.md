@@ -45,6 +45,9 @@ To use this in the template, just use the name of the class.
 ```
 
 The value in the json object can be passed as parameters to the `Process()` method.
+
+To pass multiple values we split the text value on the chars `=`, `-` and `&`.
+
 For example article numbers to fetch the price from the database.
 ```json
 {
@@ -80,47 +83,7 @@ Parser.Initialize(cfg =>
 ```
 
 #### First create the HTML template.
-```html
-<div>
-    <h1>{{Header}}</h1>
-
-    Hello {{FirstName}} {{LastName}}!                  
-
-    <div>
-        {{for Images}}
-        <div class="image">
-            <span>Name: {{Name}}</span>
-            <span><a href="{{Url}}">Link</a></span>
-            
-            
-            {{for ImageTypes}}
-            <div class="image-types">
-                <span>Type: {{Type}}</span>
-                
-                {{for ImageNames}}
-                <ul>
-                    <li>ImgName: {{Name}}</li>               
-                </ul>
-
-                {{end ImageNames}}
-            </div>
-            {{end ImageTypes}}
-
-        </div>
-        {{end Images}}
-    </div>
-
-    <div>
-        {{for Products}}
-        <div class="product">
-            <span>Name: {{Name}}</span>
-            <span>Price: {{Price}}</span>
-            <span>Size: {{Size}}</span>
-        </div>
-        {{end Products}}
-    </div>
-</div>
-```
+* [Example HTML template file](Baffi.Tests/Content/template.html)
 
 #### Then take the template and extract the JSON object.
 ```csharp
@@ -132,72 +95,8 @@ var obj = Parser.Extract(text);
 ```
 
 #### When you have the JSON object you can modify it as you want, for example like this.
-```json
-{
-  "Images": [
-    {
-      "ImageTypes": [
-        {
-          "ImageNames": [
-            {
-              "Name": "Jacket LG"
-            },
-            {
-              "Name": "Shirt LG"
-            }
-          ],
-          "Type": "Large"
-        },
-        {
-          "ImageNames": [
-            {
-              "Name": "Jacket SM"
-            },
-            {
-              "Name": "Shirt SM"
-            }
-          ],
-          "Type": "Small"
-        }
-      ],
-      "Name": "Adidas Img",
-      "Url": "www.adidas.com"
-    },
-    {
-      "ImageTypes": [
-        {
-          "ImageNames": [
-            {
-              "Name": "Jacket"
-            },
-            {
-              "Name": "Shirt"
-            }
-          ],
-          "Type": "Medium"
-        }
-      ],
-      "Name": "Nike Img",
-      "Url": "www.nike.com"
-    }
-  ],
-  "Products": [
-    {
-      "Name": "Adidas Shoe",
-      "Price": "1234:-",
-      "Size": "EU 39"
-    },
-    {
-      "Name": "Nike Shoe",
-      "Price": "4321:-",
-      "Size": "EU 40"
-    }
-  ],
-  "Header": "Yoo!",
-  "FirstName": "Jane",
-  "LastName": "Doe"
-}
-```
+
+* [Example JSON file](Baffi.Tests/Content/data.json)
 
 #### Finally take the template and the object and parse them together.
 ```csharp
