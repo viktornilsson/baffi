@@ -29,7 +29,7 @@ the `Process()` method runs when call `Parser.Compile()`.
 ```csharp
 public class PriceTag : ICustomTag
 {
-    public string Process(params string[] parameters)
+    public string Process(string[] parameters)
     {
         var val1 = parameters.Length > 0 ? int.Parse(parameters[0]) : 0;
         var val2 = parameters.Length > 1 ? int.Parse(parameters[1]) : 0;
@@ -46,7 +46,7 @@ To use this in the template, just use the name of the class.
 
 The value in the json object can be passed as parameters to the `Process()` method.
 
-To pass multiple values we split the text value on the chars `=`, `-` and `&`.
+To pass multiple values we split the text value on the char `&`.
 
 For example article numbers to fetch the price from the database.
 ```json
